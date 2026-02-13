@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('privilege', 100);
             $table->integer('aktif')->default(1);
-
-            $table->timestamps();
-
             $table->integer('user_create')->nullable();
             $table->integer('user_update')->nullable();
+            $table->dateTime('created_at')
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
+
+            $table->dateTime('updated_at')->nullable();
         });
     }
 
