@@ -24,6 +24,7 @@ class M_User_Seeder extends Seeder
                 'password' => Hash::make('SuperAdmin123&*'),
                 'email' => 'kho.alfuady@gmail.com',
                 'nik' => '3525102206870002',
+                'nip' => '198706222019031006',
                 'mfa_aktif' => 0,
                 'mfa_google_secret_key' => null,
                 'aktif' => 1,

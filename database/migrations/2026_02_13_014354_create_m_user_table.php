@@ -23,6 +23,7 @@ return new class extends Migration
 
             $table->string('email', 100)->nullable()->unique();
             $table->string('nik', 20)->nullable();
+            $table->string('nik', 20)->nullable();
 
             $table->tinyInteger('mfa_aktif')->default(1);
             $table->string('mfa_google_secret_key', 200)->nullable()->unique();
