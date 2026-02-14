@@ -26,7 +26,8 @@ class ContentSecurityPolicy
         $styleNonce = "nonce-" . $nonce;
         $scriptNonce = "nonce-" . $nonce;
 
-        $routeName = $request->route()?->getName();
+        $route = $request->route();
+        $routeName = $route ? $route->getName() : null;
 
         $unsafeInlineRoutes = [
             'welcome',
