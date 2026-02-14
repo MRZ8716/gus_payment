@@ -40,6 +40,15 @@ class ContentSecurityPolicy
             $scriptSrc = " 'unsafe-inline'";
         }
 
+        $errorStatusesAllowUnsafeInline = [400,401,403,404,419,422,429,500,502,503,];
+
+        $status = $response->getStatusCode();
+
+        if (in_array($status, $errorStatusesAllowUnsafeInline, true)) {
+            $styleSrc  = " 'unsafe-inline'";
+            $scriptSrc = " 'unsafe-inline'";
+        }
+
         $csp = "
             default-src 'self';
             script-src 'self' " . $scriptSrc . " " . $scriptNonce . ";
