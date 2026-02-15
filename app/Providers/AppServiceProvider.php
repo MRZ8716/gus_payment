@@ -19,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        foreach (glob(base_path('app/Http/Modules/*'), GLOB_ONLYDIR) as $modulePath) {
+            $moduleName = basename($modulePath);
+            $this->loadViewsFrom($modulePath . '/views', strtolower($moduleName));
+        }
     }
 }
