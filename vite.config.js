@@ -8,9 +8,6 @@ export default defineConfig({
             input: [
                 'resources/css/app.css', 
                 'resources/js/app.js',
-                'resources/vendor/compiled/css/app.css',
-                'resources/vendor/compiled/css/app-dark.css',
-                'resources/vendor/compiled/css/auth.css',
             ],
             refresh: true,
         }),
