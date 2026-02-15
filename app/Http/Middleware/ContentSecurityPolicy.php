@@ -55,9 +55,9 @@ class ContentSecurityPolicy
         $csp = "
             default-src 'self';
             script-src 'self' " . $scriptSrc . " " . $scriptNonce . ";
-            style-src 'self' " . $styleSrc . " " . $styleNonce . ";
+            style-src 'self' " . $styleSrc . " " . $styleNonce . " https://fonts.googleapis.com;
             img-src 'self' data:;
-            font-src 'self' data:;
+            font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com data:;
             frame-src 'none';
             object-src 'none';
             base-uri 'self';
