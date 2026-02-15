@@ -27,23 +27,29 @@ class ContentSecurityPolicy
         $route = $request->route();
         $routeName = $route ? $route->getName() : null;
 
+        $isDebug = config('app.debug');
+
         // exception for routes that need to allow 'unsafe-inline' for styles and scripts in array
         $unsafeInlineRoutes = [];
 
-        if (in_array($routeName, $unsafeInlineRoutes, true)) {
+        if (in_array($routeName, $unsafeInlineRoutes, true) && $isDebug) {
             $styleSrc  = " 'unsafe-inline'";
             $scriptSrc = " 'unsafe-inline'";
+            $styleNonce = "";
+            $scriptNonce = "";
         }
 
         $response = $next($request);
 
-        $errorStatusesAllowUnsafeInline = [400,401,403,404,419,422,429,500,502,503,];
+        $errorStatusesAllowUnsafeInline = [400, 401, 403, 404, 419, 422, 429, 500, 502, 503,];
 
         $status = $response->getStatusCode();
 
-        if (in_array($status, $errorStatusesAllowUnsafeInline, true)) {
+        if (in_array($status, $errorStatusesAllowUnsafeInline, true) && $isDebug) {
             $styleSrc  = " 'unsafe-inline'";
             $scriptSrc = " 'unsafe-inline'";
+            $styleNonce = "";
+            $scriptNonce = "";
         }
 
         $csp = "
@@ -56,6 +62,10 @@ class ContentSecurityPolicy
             object-src 'none';
             base-uri 'self';
             form-action 'self';
+            connect-src 'self';
+            media-src 'self';
+            worker-src 'self';
+            frame-ancestors 'none';
         ";
 
         $response->headers->set(
