@@ -27,11 +27,8 @@ class ContentSecurityPolicy
         $route = $request->route();
         $routeName = $route ? $route->getName() : null;
 
-        $unsafeInlineRoutes = [
-            'welcome',
-            'landing',
-            'home',
-        ];
+        // exception for routes that need to allow 'unsafe-inline' for styles and scripts in array
+        $unsafeInlineRoutes = [];
 
         if (in_array($routeName, $unsafeInlineRoutes, true)) {
             $styleSrc  = " 'unsafe-inline'";
