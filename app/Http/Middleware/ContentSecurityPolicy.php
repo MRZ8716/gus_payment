@@ -57,7 +57,7 @@ class ContentSecurityPolicy
             script-src 'self' " . $scriptSrc . " " . $scriptNonce . ";
             style-src 'self' " . $styleSrc . " " . $styleNonce . ";
             img-src 'self' data:;
-            font-src 'self';
+            font-src 'self' data:;
             frame-src 'none';
             object-src 'none';
             base-uri 'self';
