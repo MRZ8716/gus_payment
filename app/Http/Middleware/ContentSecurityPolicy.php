@@ -16,15 +16,13 @@ class ContentSecurityPolicy
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $response = $next($request);
-
         Vite::useCspNonce();
         $nonce = Vite::cspNonce();
 
         $styleSrc = "";
         $scriptSrc = "";
-        $styleNonce = "nonce-" . $nonce;
-        $scriptNonce = "nonce-" . $nonce;
+        $styleNonce = "'nonce-{$nonce}'";
+        $scriptNonce = "'nonce-{$nonce}'";
 
         $route = $request->route();
         $routeName = $route ? $route->getName() : null;
@@ -39,6 +37,8 @@ class ContentSecurityPolicy
             $styleSrc  = " 'unsafe-inline'";
             $scriptSrc = " 'unsafe-inline'";
         }
+
+        $response = $next($request);
 
         $errorStatusesAllowUnsafeInline = [400,401,403,404,419,422,429,500,502,503,];
 
